@@ -209,7 +209,7 @@ namespace WinTail
             }
 
             buttonStop.Text = "Start";
-            buttonStop.BackColor = Color.IndianRed;
+            buttonStop.BackColor = SystemColors.Control;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
