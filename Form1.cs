@@ -15,11 +15,11 @@ namespace WinTail
     {
         private Graphics m_graphics = null;
         private bool m_bInit = false;
-        private bool m_bRun = true;
+        private bool m_bRun = false;
         private bool m_bAutoScroll = false;
         private Thread m_thread = null;
         private AutoResetEvent m_finishedEvent = new AutoResetEvent(true);
-        private string m_fileName;
+        private string m_fileName = String.Empty;
         private const string AutoEncodingString = "Auto-detect Encoding";
 
         public Form1()
@@ -45,6 +45,18 @@ namespace WinTail
             buttonAutoScroll.BackColor = m_bAutoScroll ? Color.LightGreen : SystemColors.Control;
         }
 
+        private void ToggleButtonStop()
+        {
+            if (m_bRun == true)
+            {
+                ShutdownThread();
+            }
+            else if (m_fileName != String.Empty)
+            {
+                ReStart();
+            }
+        }
+
         private void SetTitle(string file)
         {
             Text = "WinTail - " + file;
@@ -59,21 +71,6 @@ namespace WinTail
             else
             {
                 e.Effect = DragDropEffects.None;
-            }
-        }
-
-        private void ReStart()
-        {
-            ShutdownThread();
-
-            listBox1.Items.Clear();
-
-            SetTitle(System.IO.Path.GetFileName(m_fileName));
-
-            if (m_thread == null)
-            {
-                m_thread = new Thread(new ThreadStart(StartWatcher));
-                m_thread.Start();
             }
         }
 
@@ -92,6 +89,24 @@ namespace WinTail
             }
 
             ReStart();
+        }
+
+        private void ReStart()
+        {
+            ShutdownThread();
+
+            listBox1.Items.Clear();
+
+            SetTitle(System.IO.Path.GetFileName(m_fileName));
+
+            if (m_thread == null)
+            {
+                m_thread = new Thread(new ThreadStart(StartWatcher));
+                m_thread.Start();
+            }
+
+            buttonStop.Text = "Stop";
+            buttonStop.BackColor = Color.LightGreen;
         }
 
         private void AddLine(string line)
@@ -132,18 +147,21 @@ namespace WinTail
                 fs.Seek(0, SeekOrigin.End);
                 Encoding encoding = null;
 
-                if (comboBoxEncoding.SelectedItem.ToString() == AutoEncodingString)
+                this.Invoke((MethodInvoker)delegate()
                 {
-                    encoding = TextFileEncodingDetector.DetectTextFileEncoding(m_fileName);
-                }
-                else
-                {
-                    EncodingInfoItem infoItem = comboBoxEncoding.SelectedItem as EncodingInfoItem;
-                    if (infoItem != null)
+                    if (comboBoxEncoding.SelectedItem.ToString() == AutoEncodingString)
                     {
-                        encoding = infoItem.GetEncoding();
+                        encoding = TextFileEncodingDetector.DetectTextFileEncoding(m_fileName);
                     }
-                }
+                    else
+                    {
+                        EncodingInfoItem infoItem = comboBoxEncoding.SelectedItem as EncodingInfoItem;
+                        if (infoItem != null)
+                        {
+                            encoding = infoItem.GetEncoding();
+                        }
+                    }
+                });
 
                 if (encoding == null)
                 {
@@ -180,12 +198,18 @@ namespace WinTail
 
         private void ShutdownThread()
         {
-            m_bRun = false;
-            if (!m_finishedEvent.WaitOne(10000))
+            if (m_bRun == true)
             {
-                m_thread.Abort();
+                m_bRun = false;
+                if (!m_finishedEvent.WaitOne(10000))
+                {
+                    m_thread.Abort();
+                }
+                m_thread = null;
             }
-            m_thread = null;
+
+            buttonStop.Text = "Start";
+            buttonStop.BackColor = Color.IndianRed;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -209,6 +233,11 @@ namespace WinTail
         private void buttonAutoScroll_Click(object sender, EventArgs e)
         {
             ToggleAutoScroll();
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            ToggleButtonStop();
         }
     }
 }

@@ -32,6 +32,7 @@
             this.comboBoxEncoding = new System.Windows.Forms.ComboBox();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonAutoScroll = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -42,7 +43,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 26);
+            this.listBox1.Location = new System.Drawing.Point(0, 28);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(746, 444);
             this.listBox1.TabIndex = 0;
@@ -63,9 +64,9 @@
             // buttonClear
             // 
             this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClear.Location = new System.Drawing.Point(344, 2);
+            this.buttonClear.Location = new System.Drawing.Point(247, 2);
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(53, 21);
+            this.buttonClear.Size = new System.Drawing.Size(53, 23);
             this.buttonClear.TabIndex = 2;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
@@ -73,20 +74,33 @@
             // 
             // buttonAutoScroll
             // 
+            this.buttonAutoScroll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAutoScroll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAutoScroll.Location = new System.Drawing.Point(247, 2);
+            this.buttonAutoScroll.Location = new System.Drawing.Point(665, 2);
             this.buttonAutoScroll.Name = "buttonAutoScroll";
-            this.buttonAutoScroll.Size = new System.Drawing.Size(81, 21);
+            this.buttonAutoScroll.Size = new System.Drawing.Size(81, 23);
             this.buttonAutoScroll.TabIndex = 3;
             this.buttonAutoScroll.Text = "Auto-Scroll";
             this.buttonAutoScroll.UseVisualStyleBackColor = true;
             this.buttonAutoScroll.Click += new System.EventHandler(this.buttonAutoScroll_Click);
+            // 
+            // buttonStop
+            // 
+            this.buttonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStop.Location = new System.Drawing.Point(313, 2);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(53, 23);
+            this.buttonStop.TabIndex = 4;
+            this.buttonStop.Text = "Stop";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 473);
+            this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonAutoScroll);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.comboBoxEncoding);
@@ -104,6 +118,7 @@
         private System.Windows.Forms.ComboBox comboBoxEncoding;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonAutoScroll;
+        private System.Windows.Forms.Button buttonStop;
     }
 }
 
