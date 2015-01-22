@@ -239,5 +239,14 @@ namespace WinTail
         {
             ToggleButtonStop();
         }
+
+        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyData == (Keys.C | Keys.Control)) && (listBox1.SelectedIndex != -1))
+            {
+                Clipboard.SetText(listBox1.SelectedItem.ToString());
+                e.Handled = true;
+            }
+        }
     }
 }
