@@ -17,6 +17,7 @@ namespace WinTail
         private bool m_bInit = false;
         private bool m_bRun = false;
         private bool m_bAutoScroll = false;
+        private bool m_bOnTop = false;
         private Thread m_thread = null;
         private AutoResetEvent m_finishedEvent = new AutoResetEvent(true);
         private string m_fileName = String.Empty;
@@ -43,6 +44,13 @@ namespace WinTail
         {
             m_bAutoScroll = !m_bAutoScroll;
             buttonAutoScroll.BackColor = m_bAutoScroll ? Color.LightGreen : SystemColors.Control;
+        }
+
+        private void ToggleOnTop()
+        {
+            m_bOnTop = !m_bOnTop;
+            TopMost = m_bOnTop;
+            buttonOnTop.BackColor = m_bOnTop ? Color.LightGreen : SystemColors.Control;
         }
 
         private void ToggleButtonStop()
@@ -247,6 +255,11 @@ namespace WinTail
                 Clipboard.SetText(listBox1.SelectedItem.ToString());
                 e.Handled = true;
             }
+        }
+
+        private void buttonOnTop_Click(object sender, EventArgs e)
+        {
+            ToggleOnTop();
         }
     }
 }
