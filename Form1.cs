@@ -159,7 +159,7 @@ namespace WinTail
                 {
                     if (comboBoxEncoding.SelectedItem.ToString() == AutoEncodingString)
                     {
-                        encoding = TextFileEncodingDetector.DetectTextFileEncoding(m_fileName);
+                        encoding = TextFileEncodingDetector.DetectTextFileEncoding2(m_fileName);
                     }
                     else
                     {
