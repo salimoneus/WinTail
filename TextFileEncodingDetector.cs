@@ -69,11 +69,11 @@ namespace WinTail
 
         const long _defaultHeuristicSampleSize = 0x10000; //completely arbitrary - inappropriate for high numbers of files / high speed requirements
 
-        public static Encoding DetectTextFileEncoding2(string filename)
+        public static Encoding DetectTextFileEncoding2(string InputFilename)
         {
             // Read the BOM
             var bom = new byte[4];
-            using (var file = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            using (var file = new FileStream(InputFilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 file.Read(bom, 0, 4);
             }
