@@ -18,6 +18,7 @@ namespace WinTail
         private bool m_bRun = false;
         private bool m_bAutoScroll = false;
         private bool m_bOnTop = false;
+        private bool m_bAutoFit = false;
         private Thread m_thread = null;
         private AutoResetEvent m_finishedEvent = new AutoResetEvent(true);
         private string m_fileName = String.Empty;
@@ -51,6 +52,12 @@ namespace WinTail
             m_bOnTop = !m_bOnTop;
             TopMost = m_bOnTop;
             buttonOnTop.BackColor = m_bOnTop ? Color.LightGreen : SystemColors.Control;
+        }
+
+        private void ToggleAutoFit()
+        {
+            m_bAutoFit = !m_bAutoFit;
+            buttonAutoFit.BackColor = m_bAutoFit ? Color.LightGreen : SystemColors.Control;
         }
 
         private void ToggleButtonStop()
@@ -128,10 +135,13 @@ namespace WinTail
                     m_graphics = listBox1.CreateGraphics();
                 }
 
-                SizeF mySize = m_graphics.MeasureString(line, listBox1.Font);
-                if (this.Width < mySize.Width)
+                if (m_bAutoFit)
                 {
-                    this.Width = Convert.ToInt32(mySize.Width);
+                    SizeF mySize = m_graphics.MeasureString(line, listBox1.Font);
+                    if (this.Width < mySize.Width)
+                    {
+                        this.Width = Convert.ToInt32(mySize.Width);
+                    }
                 }
 
                 if (m_bAutoScroll)
@@ -260,6 +270,11 @@ namespace WinTail
         private void buttonOnTop_Click(object sender, EventArgs e)
         {
             ToggleOnTop();
+        }
+
+        private void buttonAutoFit_Click(object sender, EventArgs e)
+        {
+            ToggleAutoFit();
         }
     }
 }

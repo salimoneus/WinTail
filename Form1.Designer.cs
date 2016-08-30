@@ -34,6 +34,7 @@
             this.buttonAutoScroll = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonOnTop = new System.Windows.Forms.Button();
+            this.buttonAutoFit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -115,19 +116,32 @@
             // 
             this.buttonOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOnTop.Location = new System.Drawing.Point(593, 2);
+            this.buttonOnTop.Location = new System.Drawing.Point(521, 2);
             this.buttonOnTop.Name = "buttonOnTop";
             this.buttonOnTop.Size = new System.Drawing.Size(66, 23);
             this.buttonOnTop.TabIndex = 5;
-            this.buttonOnTop.Text = "On Top";
+            this.buttonOnTop.Text = "TopMost";
             this.buttonOnTop.UseVisualStyleBackColor = true;
             this.buttonOnTop.Click += new System.EventHandler(this.buttonOnTop_Click);
+            // 
+            // buttonAutoFit
+            // 
+            this.buttonAutoFit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAutoFit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAutoFit.Location = new System.Drawing.Point(593, 2);
+            this.buttonAutoFit.Name = "buttonAutoFit";
+            this.buttonAutoFit.Size = new System.Drawing.Size(66, 23);
+            this.buttonAutoFit.TabIndex = 6;
+            this.buttonAutoFit.Text = "Auto-Fit";
+            this.buttonAutoFit.UseVisualStyleBackColor = true;
+            this.buttonAutoFit.Click += new System.EventHandler(this.buttonAutoFit_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 473);
+            this.Controls.Add(this.buttonAutoFit);
             this.Controls.Add(this.buttonOnTop);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonAutoScroll);
@@ -149,6 +163,7 @@
         private System.Windows.Forms.Button buttonAutoScroll;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonOnTop;
+        private System.Windows.Forms.Button buttonAutoFit;
     }
 }
 
